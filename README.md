@@ -1,4 +1,4 @@
-conky_config
+desktop_config
 ============
 
-A list of my conky configuration files
+A list of my configuration files for openbox, conky...
