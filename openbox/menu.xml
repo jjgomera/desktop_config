@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
+	<menu id="root-menu" label="Openbox">
+		<item label="Ejecutar">
+			<action name="Execute">
+				<execute>
+					gmrun
+				</execute>
+			</action>
+		</item>
+		<separator/>
+		<item label="Terminal">
+			<action name="Execute">
+				<execute>
+					gnome-terminal
+				</execute>
+			</action>
+		</item>
+		<item label="Firefox">
+			<action name="Execute">
+				<execute>
+					bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc /home/jjgomera/compilaciones/firefox/firefox'
+				</execute>
+			</action>
+		</item>
+		<item label="Nautilus">
+			<action name="Execute">
+				<execute>nautilus --no-desktop</execute>
+			</action>
+		</item>
+		<menu execute="sh /home/jjgomera/.config/openbox/lugares.sh" id="pipe-57200" label="Lugares"/>
+		<menu execute="python /home/jjgomera/.config/openbox/books_menu.py /media/datos/Biblioteca/Proyecto" id="pipe-57300" label="Biblioteca"/>
+		<menu id="root-menu-892456" label="Aceituna">
+			<item label="2008-2009">
+				<action name="Execute">
+					<execute>libreoffice --calc /home/jjgomera/Documentos/campaña2008-2009.ods</execute>
+				</action>
+			</item>
+			<item label="2009-2010">
+				<action name="Execute">
+					<execute>libreoffice --calc /home/jjgomera/Documentos/campaña2009-2010.ods</execute>
+				</action>
+			</item>
+			<item label="2010-2011">
+				<action name="Execute">
+					<execute>libreoffice --calc /home/jjgomera/Documentos/campaña2010-2011.ods</execute>
+				</action>
+			</item>
+			<item label="2011-2012">
+				<action name="Execute">
+					<execute>libreoffice --calc /home/jjgomera/Documentos/campaña2011-2012.ods</execute>
+				</action>
+			</item>
+			<item label="2013-2014">
+				<action name="Execute">
+					<execute>libreoffice --calc /home/jjgomera/Documentos/campaña2013-2014.ods</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<menu id="root-menu-843625" label="Accesorios">
+			<menu id="root-menu-843625-831352" label="Inicio">
+				<item label="trayer">
+					<action name="Execute">
+						<execute>trayer --edge bottom --align right --widthtype request --height 18 --expand true --SetPartialStrut true --transparent true --alpha 255 --margin 800</execute>
+					</action>
+				</item>
+				<item label="conky">
+					<action name="Execute">
+						<execute>sh /home/jjgomera/configuracion/conky.sh</execute>
+					</action>
+				</item>
+				<item label="visibility">
+					<action name="Execute">
+						<execute>
+							python /home/jjgomera/compilaciones/visibility-python.git/visibility.py
+						</execute>
+					</action>
+				</item>
+				<item label="xcompmgr">
+					<action name="Execute">
+						<execute>
+							bash -c 'killall xcompmgr &amp; xcompmgr -fF -I-.002 -O-.003 -D3 -cC -t-5 -l-6 -r5 &amp; sleep 10 &amp;&amp; transset-df -n conkyrtorrent 0.7 &amp; sleep 10 &amp;&amp; transset-df -n conkycalendar 0.7 &amp; sleep 10 &amp;&amp;  transset-df -n conkygmail 0.7 &amp; sleep 10 &amp;&amp; transset-df -n conkysistema 0.7'
+						</execute>
+					</action>
+				</item>
+				<item label="terminal de fondo">
+					<action name="Execute">
+						<execute>sleep 10 &amp;&amp; gnome-terminal --window-with-profile=fondo --geometry=100x42+270+140 --role=fondo</execute>
+					</action>
+				</item>
+			</menu>
+			<menu id="root-menu-843625-825153" label="Captura de pantalla">
+				<item label="Pántalla de diálogo">
+					<action name="Execute">
+						<execute>
+							gnome-screenshot --interactive
+						</execute>
+					</action>
+				</item>
+				<item label="Ahora">
+					<action name="Execute">
+						<execute>
+							scrot 'Pantallazo_%s_$wx$h.png' -e 'mv $f ~/Escritorio/ &amp; gpicview ~/Escritorio/$f'
+						</execute>
+					</action>
+				</item>
+				<item label="En 5 segundos ...">
+					<action name="Execute">
+						<execute>
+							scrot -d 5 'Pantallazo_%s_$wx$h.png' -e 'mv $f ~/Escritorio/ &amp; gpicview ~/Escritorio/$f'
+						</execute>
+					</action>
+				</item>
+				<item label="En 10 segundos ...">
+					<action name="Execute">
+						<execute>
+							scrot -d 10 'Pantallazo_%s_$wx$h.png' -e 'mv $f ~/Escritorio/ &amp; gpicview ~/Escritorio/$f'
+						</execute>
+					</action>
+				</item>
+				<item label="Ventana">
+					<action name="Execute">
+						<execute>
+							scrot -s -b 'Pantallazo_%s_$wx$h.png' -e 'mv $f ~/Escritorio/ &amp; gpicview ~/Escritorio/$f'
+						</execute>
+					</action>
+				</item>
+			</menu>
+			<item icon="/usr/share/icons/gnome/22x22/places/folder.png" label="PcmanFM">
+				<action name="Execute">
+					<execute>pcmanfm</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/k3b.xpm" label="Grabador CD/DVD">
+				<action name="Execute">
+					<execute>
+						k3b
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/VBox.png" label="VirtualBox">
+				<action name="Execute">
+					<execute>
+						VirtualBox
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/help/uk/gedit/figures/gedit-icon.png" label="Editor de textos">
+				<action name="Execute">
+					<execute>
+						gedit
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/file-roller.xpm" label="Gestor de archivadores">
+				<action name="Execute">
+					<execute>
+						 bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc peazip'
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/qalculate.png" label="Calculadora">
+				<action name="Execute">
+					<execute>
+						 bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc qalculate'
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/icons/gnome/16x16/apps/gucharmap.png" label="Mapa de caracteres">
+				<action name="Execute">
+					<execute>
+						gucharmap
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/pyrenamer.xpm" label="Renombrador masivo">
+				<action name="Execute">
+					<execute>
+						pyrenamer
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/icons/isomaster/isomaster.png" label="Editor imágines ISO">
+				<action name="Execute">
+					<execute>
+						isomaster
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-843625-60856" label="Configuracion">
+			<item label="Editor openbox">
+				<action name="Execute">
+					<execute>
+							obconf
+					</execute>
+				</action>
+			</item>
+			<item label="Editar rc.xml manualmente">
+				<action name="Execute">
+					<execute>
+						gedit ~/.config/openbox/rc.xml
+					</execute>
+				</action>
+			</item>
+			<item label="Editor de menu">
+				<action name="Execute">
+					<execute>
+							obmenu
+					</execute>
+				</action>
+			</item>
+			<item label="Editar programas al inicio">
+				<action name="Execute">
+					<execute>
+						gedit ~/.config/openbox/autostart.sh
+					</execute>
+				</action>
+			</item>
+			<item label="Resolución de pantalla">
+				<action name="Execute">
+					<execute>arandr</execute>
+				</action>
+			</item>
+			<item label="Fondo de escritorio">
+				<action name="Execute">
+					<execute>
+							nitrogen ~/configuracion/fondoescritorio
+					</execute>
+				</action>
+			</item>
+			<item label="Editor GTK">
+				<action name="Execute">
+					<execute>
+							lxappearance
+					</execute>
+				</action>
+			</item>
+			<item label="Editor Qt">
+				<action name="Execute">
+					<execute>
+						qtconfig-qt4
+					</execute>
+				</action>
+			</item>
+			<item label="Protector de pantalla">
+				<action name="Execute">
+					<execute>
+							xscreensaver-demo
+					</execute>
+				</action>
+			</item>
+			<item label="Efectos">
+				<action name="Execute">
+					<execute>
+							gcompmgr
+					</execute>
+				</action>
+			</item>
+			<item label="Volumen">
+				<action name="Execute">
+					<execute>
+						gnome-volume-control
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-533933" label="Internet">
+			<item icon="/home/jjgomera/compilaciones/firefox/icons/mozicon128.png" label="Iceweasel">
+				<action name="Execute">
+					<execute>bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc iceweasel'</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/chromium.png" label="Chrome">
+				<action name="Execute">
+					<execute>chromium</execute>
+				</action>
+			</item>
+			<separator/>
+			<item icon="/home/jjgomera/configuracion/amule.png" label="amule">
+				<action name="Execute">
+					<execute>amulegui -s</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/configuracion/rtorrent.png" label="rtorrent">
+				<action name="Execute">
+					<execute>alltray -i &quot;/home/jjgomera/configuracion/rtorrent.png&quot; -x 'gnome-terminal --window-with-profile=rtorrent --role=rtorrent  --hide-menubar -t &quot;rtorrent&quot; -e &quot;rtorrent&quot;'</execute>
+				</action>
+			</item>
+			g
+			<item icon="/home/jjgomera/jdownloader/jd/img/logo/jd_logo_54_54.png" label="JDownloader">
+				<action name="Execute">
+					<execute>
+						/home/jjgomera/jdownloader/JDLauncher
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/xchat.png" label="chat">
+				<action name="Execute">
+					<execute>
+						xchat
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/pidgin-menu.xpm" label="Pidgin">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc pidgin'
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/radiotray.png" label="RadioTray">
+				<action name="Execute">
+					<execute>
+						radiotray
+					</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/configuracion/qsopcast.png" label="gsopcast">
+				<action name="Execute">
+					<execute>
+						gsopcast
+					</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/Programacion/RSSEpublibre/EPL_RSS_multi/torrent.ico" label="Epublibre RSS">
+				<action name="Execute">
+					<execute>python3 /home/jjgomera/Programacion/RSSEpublibre/EPL_RSS_multi/EPL_RSS_server.py</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-132054" label="Imagen">
+			<item icon="/usr/share/pixmaps/gpicview.png" label="Visor de imágenes">
+				<action name="Execute">
+					<execute>
+						gpicview
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/gimp.xpm" label="Gimp">
+				<action name="Execute">
+					<execute>
+						gimp
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/inkscape.xpm" label="Inkscape">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc inkscape'
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/scribus.xpm" label="Scribus">
+				<action name="Execute">
+					<execute>
+						scribus
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/gcolor2/gcolor2.xpm" label="Paleta de colores">
+				<action name="Execute">
+					<execute>
+						gcolor2
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/icons/hicolor/48x48/apps/gnome-specimen.png" label="Visor de fuentes">
+				<action name="Execute">
+					<execute>
+						gnome-specimen
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-62424" label="Multimedia">
+			<item icon="/usr/share/icons/gmusicbrowser.png" label="gmusicbrowser">
+				<action name="Execute">
+					<execute>/home/jjgomera/compilaciones/gmusicbrowser/gmusicbrowser.pl</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/smplayer.xpm" label="smplayer">
+				<action name="Execute">
+					<execute>
+						smplayer
+					</execute>
+				</action>
+			</item>
+			<separator/>
+			<item icon="/usr/share/icons/hicolor/32x32/apps/vlc.xpm" label="VLC">
+				<action name="Execute">
+					<execute>
+						vlc
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/calibre.png" label="Calibre">
+				<action name="Execute">
+					<execute>
+						/home/jjgomera/Programacion/calibrefix/calibre/calibre
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/gcstar_logo.xpm" label="Gcstar">
+				<action name="Execute">
+					<execute>
+						gcstar
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/icons/hicolor/48x48/apps/soundconverter.png" label="Sound Converter">
+				<action name="Execute">
+					<execute>
+						soundconverter
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/gaupol.xpm" label="Gaupol">
+				<action name="Execute">
+					<execute>
+						gaupol
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/audacity32.xpm" label="Audacity">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc audacity'
+					</execute>
+				</action>
+			</item>
+			<item label="Avidemux">
+				<action name="Execute">
+					<execute>
+						avidemux
+					</execute>
+				</action>
+			</item>
+			<separator/>
+			<item label="omxplayer">
+				<action name="Execute">
+					<execute>command</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/Programacion/xbmc-keyboard/images/xbmc.png" label="xbmc">
+				<action name="Execute">
+					<execute>/home/jjgomera/Programacion/xbmc-keyboard/xbmc.py</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-224215" label="Trabajo">
+			<menu icon="/home/jjgomera/configuracion/libreoffice.png" id="root-menu-224215-844351" label="Libreoffice">
+				<item icon="/home/jjgomera/configuracion/libreoffice.png" label="Libreoffice">
+					<action name="Execute">
+						<execute>libreoffice</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-calc.png" label="Hoja de cálculo">
+					<action name="Execute">
+						<execute>libreoffice --calc</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-writer.png" label="Procesador de textos">
+					<action name="Execute">
+						<execute>libreoffice --writer</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-base.png" label="Base de datos">
+					<action name="Execute">
+						<execute>libreoffice --base</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-impress.png" label="Presentación">
+					<action name="Execute">
+						<execute>libreoffice --impress</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-draw.png" label="Dibujo">
+					<action name="Execute">
+						<execute>libreoffice --draw</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-math.png" label="Fórmula">
+					<action name="Execute">
+						<execute>libreoffice --math</execute>
+					</action>
+				</item>
+				<item icon="/usr/share/icons/locolor/32x32/apps/libreoffice-writer.png" label="Página web">
+					<action name="Execute">
+						<execute>libreoffice --web</execute>
+					</action>
+				</item>
+			</menu>
+			<item icon="/usr/share/pixmaps/gnome-gnumeric.xpm" label="Gnumeric">
+				<action name="Execute">
+					<execute>gnumeric</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/abiword.xpm" label="Abiword">
+				<action name="Execute">
+					<execute>abiword</execute>
+				</action>
+			</item>
+			<separator/>
+			<item icon="/usr/share/pixmaps/lyx-32x32.xpm" label="Lyx">
+				<action name="Execute">
+					<execute>
+						lyx
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/qtoctave.xpm" label="Octave">
+				<action name="Execute">
+					<execute>
+						qtoctave
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/wxmaxima-32.xpm" label="wxmaxima">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc wxmaxima'
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/icons/hicolor/22x22/apps/rkward.png" label="rkward">
+				<action name="Execute">
+					<execute>
+						rkward
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/qtiplot.xpm" label="qtiplot">
+				<action name="Execute">
+					<execute>qtiplot</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/freecad/freecad.xpm" label="Freecad">
+				<action name="Execute">
+					<execute>freecad</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/scilab/icons/scilab.xpm" label="Scilab">
+				<action name="Execute">
+					<execute>
+						scilab
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/dia_menu.xpm" label="Dia">
+				<action name="Execute">
+					<execute>
+						dia
+					</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/geogebra.png" label="Geogebra">
+				<action name="Execute">
+					<execute>
+						geogebra
+					</execute>
+				</action>
+			</item>
+			<separator/>
+			<item icon="/home/jjgomera/Programacion/pychemqt/images/pychemqt.png" label="pychemqt">
+				<action name="Execute">
+					<execute>
+						python ~/Programacion/pychemqt/pychemqt.py
+					</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/.wine/drive_c/CC5/cc5.png" label="Chemcad">
+				<action name="Execute">
+					<execute>
+						env WINEPREFIX=&quot;/home/jjgomera/.wine&quot; wine &quot;C:\CC5\cc5.exe&quot;
+					</execute>
+				</action>
+			</item>
+			<item icon="/home/jjgomera/configuracion/dwsim.jpg" label="DWSIM">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc mono /home/jjgomera/Programacion/DWSIM_Mono_Edition_bin_v21_b4503/DWSIM/DWSIM.exe'
+					</execute>
+				</action>
+			</item>
+			<separator/>
+			<item icon="/usr/share/pixmaps/gelemental.xpm" label="Tabla periódica">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc gelemental'
+					</execute>
+				</action>
+			</item>
+			<item label="Pipe Flow">
+				<action name="Execute">
+					<execute>
+						wine &quot;/home/jjgomera/.wine/drive_c/Archivos de programa/Pipe Flow Expert/PipeFlowExpert.exe&quot;
+					</execute>
+				</action>
+			</item>
+			<item label="Epcon">
+				<action name="Execute">
+					<execute>
+						wine &quot;/home/jjgomera/.wine/drive_c/Program Files/EPCON/APITECH70/APITech7.exe&quot;
+					</execute>
+				</action>
+			</item>
+			<item label="Triana Olivo">
+				<action name="Execute">
+					<execute>
+						wine &quot;/home/jjgomera/.wine/drive_c/Archivos de programa/Triana2001 Olivo/Triana.exe&quot;
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-73942" label="Programación">
+			<menu id="root-menu-73942-12830" label="Documentacion">
+				<item label="Rapid GUI Programming  with Python and Qt (Pdf)">
+					<action name="Execute">
+						<execute>
+							evince &quot;/media/datos/Biblioteca/Software/python/Books for third party libraries/Rapid GUI Programming with Python and Qt - The Definitive Guide to PyQt Programming (2008).pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Learning Python">
+					<action name="Execute">
+						<execute>
+							evince &quot;/media/datos/Biblioteca/Software/python/Books/Learning Python, Fourth Edition (2009).pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Multiparameter equation of state - Span">
+					<action name="Execute">
+						<execute>
+							evince &quot;/media/datos/Biblioteca/Multiparameter Equations of State.djvu&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Perry Cap17 : Solid-Gas">
+					<action name="Execute">
+						<execute>
+							evince /media/datos/Biblioteca/otros/Perry/Chap17.pdf
+						</execute>
+					</action>
+				</item>
+				<item label="Beginning Python - From Novice to Pro (Pdf)">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/Programacion/Hetland - Beginning Python - From Novice to Pro (Apress, 2005).pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Perry's Handbook">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/libros/Perry's Chemical Engineers' Handbook 7th Edition.pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Matplotlib">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/Programacion/python/Matplotlib.pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Scipy">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/Programacion/python/scipy-ref.pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Numpy">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/Programacion/python/numpy.pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="Chemcad">
+					<action name="Execute">
+						<execute>
+							xchm /home/jjgomera/Programacion/Chemcad/CC5.chm
+						</execute>
+					</action>
+				</item>
+				<item label="Termodinamica">
+					<action name="Execute">
+						<execute>
+							evince &quot;/home/jjgomera/libros/Introduccion a la termodinamica en ingenieria quimica - Joseph Mauk Smith.pdf&quot;
+						</execute>
+					</action>
+				</item>
+				<item label="API Data Book">
+					<action name="Execute">
+						<execute>
+							evince &quot;/media/datos/Biblioteca/archivos/Chemcad/Epcon/API - Technical Databook - Petroleum Refining.pdf&quot;
+						</execute>
+					</action>
+				</item>
+			</menu>
+			<item icon="/usr/share/pixmaps/eric.xpm" label="eric4">
+				<action name="Execute">
+					<execute>eric4</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/ninja-ide.png" label="Ninja">
+				<action name="Execute">
+					<execute>ninja-ide</execute>
+				</action>
+			</item>
+			<item icon="/usr/share/pixmaps/designer-qt4.png" label="qt-designer">
+				<action name="Execute">
+					<execute>
+						designer
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<menu id="root-menu-224615" label="Juegos">
+			<item label="Lincity">
+				<action name="Execute">
+					<execute>
+						lincity-ng
+					</execute>
+				</action>
+			</item>
+			<item label="TORCS">
+				<action name="Execute">
+					<execute>
+						torcs
+					</execute>
+				</action>
+			</item>
+			<item label="xmoto">
+				<action name="Execute">
+					<execute>
+						xmoto
+					</execute>
+				</action>
+			</item>
+			<item label="Caesar III">
+				<action name="Execute">
+					<execute>
+						wine &quot;/home/jjgomera/.wine/drive_c/SIERRA/Caesar3/c3.exe&quot;
+					</execute>
+				</action>
+			</item>
+			<item label="0ad">
+				<action name="Execute">
+					<execute>0ad</execute>
+				</action>
+			</item>
+			<item label="Pychess">
+				<action name="Execute">
+					<execute>
+						bash -c 'GTK2_RC_FILES=/usr/share/themes/Clearlooks/gtk-2.0/gtkrc pychess'
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<!-- This requires the presence of the 'menu' package to work -->
+		<menu execute="python /home/jjgomera/.config/openbox/procesos.py" id="pipe-481046" label="Lista de procesos"/>
+		<menu id="Debian"/>
+		<menu id="root-menu-5719" label="Sistema">
+			<item label="Fecha/Hora">
+				<action name="Execute">
+					<execute>
+						gksu time-admin
+					</execute>
+				</action>
+			</item>
+			<item label="Monitor de sistema">
+				<action name="Execute">
+					<execute>
+						gnome-terminal -e &quot;htop&quot;
+					</execute>
+				</action>
+			</item>
+			<item label="Synaptic">
+				<action name="Execute">
+					<execute>
+						gksu synaptic
+					</execute>
+				</action>
+			</item>
+			<item label="Actualizar">
+				<action name="Execute">
+					<execute>
+						gksu gnome-terminal -e &quot;upgrade-system&quot;
+					</execute>
+				</action>
+			</item>
+			<item label="Aplicaciones preferidas">
+				<action name="Execute">
+					<execute>
+						gksu galternatives
+					</execute>
+				</action>
+			</item>
+			<item label="Sesión">
+				<action name="Execute">
+					<execute>
+						gksu gdmsetup
+					</execute>
+				</action>
+			</item>
+			<item label="Redes">
+				<action name="Execute">
+					<execute>
+						gksu network-admin
+					</execute>
+				</action>
+			</item>
+			<item label="Usuarios/grupos">
+				<action name="Execute">
+					<execute>
+						gksu users-admin
+					</execute>
+				</action>
+			</item>
+		</menu>
+		<separator/>
+		<menu id="client-list-menu"/>
+		<separator/>
+		<item label="Reconfigurar">
+			<action name="Reconfigure"/>
+		</item>
+		<item label="Reiniciar">
+			<action name="Restart"/>
+		</item>
+		<separator/>
+		<item label="Cerrar sesión">
+			<action name="Exit"/>
+		</item>
+		<item label="Apagar">
+			<action name="Execute">
+				<execute>
+					gksu halt
+				</execute>
+			</action>
+		</item>
+	</menu>
+</openbox_menu>
