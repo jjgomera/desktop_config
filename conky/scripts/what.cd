@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#script to extract info for your state in what.cd tracker
+#requeriments: curl
+
+cookie="session=FFqoAiMH7yUQ2cYHJJkN3%2B5QL5BVDrvCOK0dftsaKW9pzRGtJpc5a9Vu7luSaP4c1yd7m92RD1nbaUMpzMmSX%2F2GEC1tlbXie4%2B2ca8F6QY8tgeHZ5yhfEX3oRFfpW%2BNafkAOelpGae1U2gv3VgJGQ%3D%3D"  #Copy this value from firefox cookies manager
+
+case "$1" in
+
+descargado)
+	curl -s -m 10 https://what.cd/user.php?id=92166 --cookie "$cookie" | grep "Downloaded" | cut -d">" -f2 |cut -d" " -f2- | cut -d"<" -f1
+	;;
+
+subido)
+	curl -s -m 10 https://what.cd/user.php?id=92166 --cookie "$cookie" | grep "Uploaded" |head -n1| cut -d">" -f2 |cut -d" " -f2- | cut -d"<" -f1
+	;;
+
+ratio)
+	curl -s -m 10 https://what.cd/user.php?id=92166 --cookie "$cookie" | grep "Ratio" |tail -n2 | head -n1 | cut -d'"' -f4
+	;;
+
+rango)
+	curl -s -m 10 https://what.cd/user.php?id=92166 --cookie "$cookie" | grep "Overall" | cut -d">" -f3 |cut -d"<" -f1 | sed s/Overall\ rank/Rango/
+	;;
+
+esac

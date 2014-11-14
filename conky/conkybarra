@@ -87,7 +87,6 @@ override_utf8_locale yes
 # Add spaces to keep things from moving about?  This only affects certain objects.
 use_spacer none
 #${voffset 1}${font Dejavu Sans:size=8}${color2}${acpitemp}ºC$font${color}${voffset -1}${tab}${tab}
-#${color green}${execi 120 ~/configuracion/quieroserfallera badoo}
 
 TEXT
 ${font Dejavu Sans:size=8}  ${color2}${platform it87.656 temp 1}ºC$font${color1}    cpu: ${color}${voffset -5}${cpugraph 11,50 404040 404040} ${voffset 5}${goto 105}${color2}${cpu}${goto 150}${color1}ram: ${voffset -5}${color}${memgraph 11,50 404040 404040} ${voffset 5}${goto 200}${color2}${memperc}${color1}       io: ${voffset -5}${color}${diskiograph 11,50 404040 404040}${voffset 5}    ${color}${font Arrows:size=8}N$font $color2${downspeed eth0}${color} ${voffset -5}${downspeedgraph eth0 11,60 404040 404040 700}${voffset 4}  ${color}${font Arrows:size=8}S$font $color2${upspeed eth0}${color} ${voffset -5}${upspeedgraph eth0 11,60 404040 404040 70}    ${voffset -8}$color2${font DS-DIGI:size=8}${time %H:%M}
