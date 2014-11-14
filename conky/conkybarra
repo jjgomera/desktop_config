@@ -1,0 +1,93 @@
+#!/usr/bin/conky -c
+
+# Use Xft?
+use_xft yes
+#xftfont AvantGarde LT Medium-7
+xftfont Dejavu Sans Mono:size=7
+#xftfont Sans-Serif:size=9:pixelsize=11
+
+# Update interval in seconds
+update_interval 2
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+own_window_hints undecorate,above,sticky,skip_taskbar,skip_pager
+own_window_title conkybarra
+
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 500 10
+maximum_width 1000
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_margin 5
+
+# border width
+border_width 1
+
+# Default colors and also border colors
+default_color 606060
+#default_shade_color white
+#default_outline_color black
+own_window_colour 181818
+
+color1 aaaaaa #etiquetas
+color2 eeeeee #datos
+
+# Text alignment, other possible values are commented
+#alignment top_left
+#alignment top_right
+#alignment bottom_left
+alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x -20
+gap_y 0
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase no
+short_units yes
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 1
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer none
+#${voffset 1}${font Dejavu Sans:size=8}${color2}${acpitemp}ºC$font${color}${voffset -1}${tab}${tab}
+#${color green}${execi 120 ~/configuracion/quieroserfallera badoo}
+
+TEXT
+${font Dejavu Sans:size=8}  ${color2}${platform it87.656 temp 1}ºC$font${color1}    cpu: ${color}${voffset -5}${cpugraph 11,50 404040 404040} ${voffset 5}${goto 105}${color2}${cpu}${goto 150}${color1}ram: ${voffset -5}${color}${memgraph 11,50 404040 404040} ${voffset 5}${goto 200}${color2}${memperc}${color1}       io: ${voffset -5}${color}${diskiograph 11,50 404040 404040}${voffset 5}    ${color}${font Arrows:size=8}N$font $color2${downspeed eth0}${color} ${voffset -5}${downspeedgraph eth0 11,60 404040 404040 700}${voffset 4}  ${color}${font Arrows:size=8}S$font $color2${upspeed eth0}${color} ${voffset -5}${upspeedgraph eth0 11,60 404040 404040 70}    ${voffset -8}$color2${font DS-DIGI:size=8}${time %H:%M}

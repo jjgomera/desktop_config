@@ -1,0 +1,65 @@
+#!/usr/bin/conky -c
+
+# Update interval in seconds
+update_interval 5.0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_title conkygmail
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 250 5
+maximum_width 500
+
+draw_shades no
+draw_outline no # amplifies text if yes
+draw_borders no
+draw_graph_borders no
+
+use_xft yes
+xftalpha 0.9
+#xftfont Terminus:size=8
+#xftfont Dejavu-Sans:size=8
+xftfont Sans-Serif:size=9:pixelsize=11
+uppercase no
+override_utf8_locale yes
+use_spacer none
+
+# text_buffer_size 512
+
+stippled_borders 3
+border_margin 9
+border_width 10
+
+# Gap between borders of screen and text
+gap_x 00
+gap_y 30
+
+# Default colors and also border colors, grey90 == #e5e5e5
+default_color white
+color1 blue
+
+# Text alignment, other possible values are commented
+#alignment top_left
+#alignment top_right
+#alignment bottom_left
+alignment bottom_right
+
+text_buffer_size 512
+
+# stuff after 'TEXT' will be formatted on screen
+
+TEXT
+${image /home/jjgomera/configuracion/mail.gif}${voffset 8}${offset 30}${font Anklepants:regular:size=11}${color 4444ff}G${color ff2222}m${color yellow}a${color 4444ff}i${color 22ff22}l$font
+${voffset -7}${color #ffd700}${hr 1}$color
+${color gold}jjgomera: ${color}${execi 600 perl ~/configuracion/gmail_jjgomera.pl n} ${color aaaaaa}mensaje(s) sin leer.
+${color aaaaaa}${execi 600 perl ~/configuracion/gmail_jjgomera.pl e}
+${voffset 5}${color gold}volante52: ${color}${execi 600 perl ~/configuracion/gmail_volante52.pl n} ${color aaaaaa}mensaje(s) sin leer.
+${color aaaaaa}${execi 600 perl ~/configuracion/gmail_volante52.pl e}
+${voffset -7}${color #ffd700}${hr 1}$color

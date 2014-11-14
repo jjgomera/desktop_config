@@ -1,0 +1,94 @@
+#!/usr/bin/conky -c
+#
+# Update interval in seconds
+update_interval 5.0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_title conkyraspberry
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# maintain spacing between certain elements
+use_spacer left
+
+# Minimum size of text area
+minimum_size 250 5
+maximum_width 250
+
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+
+#position
+alignment top_right
+gap_x 00
+gap_y 200
+
+# set to yes if you want tormo to be forked in the background
+background no
+
+#font
+use_xft yes
+xftfont DejaVu Sans:size=8
+
+
+border_width 1
+cpu_avg_samples 1
+default_color white
+default_outline_color white
+default_shade_color white
+
+
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+stippled_borders 0
+uppercase no
+show_graph_scale no
+show_graph_range no
+text_buffer_size 2550
+
+
+TEXT
+${image /home/pi/configuracion/raspberry.gif -p 0,0}${offset 25}${voffset 15}${font Anklepants:regular:size=11}${color #5da5d3}$nodename$font $alignr$color $uptime
+${voffset -5}${color ffd700}$hr
+${color grey}$sysname $kernel on $machine $alignr${color grey}Actualizaciones:${color ffd700}${execi 200 aptitude search "~U" | wc -l | tail}
+${color grey}Procesos:$color$processes  $alignr${color grey}Temperatura:$color${execpi 5 /opt/vc/bin/vcgencmd measure_temp | cut -c 6-9 | xargs ~/configuracion/colorize.sh}
+${color grey}HD $color${fs_used /}/${fs_size /} ${fs_bar 7 /}
+${color grey}CPU a ${freq}Hz $color $cpu% ${cpubar 7}
+${font DejaVu Sans Mono:regular:size=9}${color grey}                      CPU%   MEM%
+${color lightgrey}   ${top name 1} ${top cpu 1} ${top mem 1}
+${color lightgrey}   ${top name 2} ${top cpu 2} ${top mem 2}
+${color lightgrey}   ${top name 3} ${top cpu 3} ${top mem 3}
+${color ffd700}$hr
+${color grey}RAM: $color $mem/$memmax ${membar 7}
+${color grey}Swap:$color $swap/$swapmax ${swapbar 7}
+${font DejaVu Sans Mono:regular:size=9}${color grey}                      MEM%   CPU%
+${color lightgrey}   ${top_mem name 1} ${top_mem mem 1} ${top_mem cpu 1}
+${color lightgrey}   ${top_mem name 2} ${top_mem mem 2} ${top_mem cpu 2}
+${color lightgrey}   ${top_mem name 3} ${top_mem mem 3} ${top_mem cpu 3}$font
+${color ffd700}$hr
+${color grey}Red $alignr${addrs eth0}
+${color 0000ff}Descarga: ${color white}${downspeed eth0}${alignr}${color white}${totaldown eth0}
+${color 00ff00}Subida: ${color white}${upspeed eth0}${alignr}${color white}${totalup eth0}
+${color1}${upspeedgraph eth0 25,250 000000 00ff00 60}
+${voffset -39}${color1}${downspeedgraph eth0 25,250 000000 0000ff 700}
+#########
+# rtorrent
+#########
+${voffset 5}${image /home/pi/configuracion/rtorrent.gif -p 0,340}${offset 25}${voffset 5}${font Anklepants:regular:size=11}${color #5da5d3} rTorrent$font
+${voffset -5}${color #ffd700}${hr 1}
+${if_running rtorrent}${voffset 5}${color #888888}What${goto 50}${font Arrows:size=10}N${font Sans-Serif:size=9:pixelsize=11}${execi 600 sh ~/configuracion/what.cd descargado } ${goto 120}${font Arrows:size=10}S${font Sans-Serif:size=9:pixelsize=11}${execi 600 sh ~/configuracion/what.cd subido }$alignr${color ffd700} ${execi 600 sh ~/configuracion/what.cd ratio }
+${voffset -5}${color #888888}${stippled_hr 2}$color
+${voffset 3}${color #888888}${execpi 10 ~/configuracion/rtorrent.sh /media/seedbox/.rtorrent/rtorrent_rpc/xmlrpc2scgi.py /media/seedbox/.rtorrent/rtorrent_rpc/rpc.socket}
+${voffset -15}${color #ffd700}${hr 1}$else${color red}${font bold}Rtorrent no iniciado
+${color #888888}${font}Borra ~/.rtorrent/rtorrent_rpc/rpc.socket$endif
+${voffset -40}
