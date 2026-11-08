@@ -1,92 +1,92 @@
-#!/usr/bin/conky -c
-
-# Use Xft?
-use_xft yes
-#xftfont AvantGarde LT Medium-7
-xftfont Dejavu Sans Mono:size=7
-#xftfont Sans-Serif:size=9:pixelsize=11
-
-# Update interval in seconds
-update_interval 2
-
-# This is the number of times Conky will update before quitting.
-# Set to zero to run forever.
-total_run_times 0
-
-# Create own window instead of using desktop (required in nautilus)
-own_window yes
-own_window_transparent yes
-own_window_type desktop
-own_window_hints undecorate,above,sticky,skip_taskbar,skip_pager
-own_window_title conkybarra
+conky.config = {
+--!/usr/bin/conky -c
 
 
-# Use double buffering (reduces flicker, may not work for everyone)
-double_buffer yes
+-- Use Xft?
+	use_xft = true,
+	font = 'Dejavu Sans Mono:size=9',
 
-# Minimum size of text area
-minimum_size 500 10
-maximum_width 1000
+-- Update interval in seconds
+	update_interval = 5,
 
-# Draw shades?
-draw_shades no
+-- This is the number of times Conky will update before quitting.
+-- Set to zero to run forever.
+	total_run_times = 0,
 
-# Draw outlines?
-draw_outline no
+-- Create own window instead of using desktop (required in nautilus)
+	own_window = true,
+	own_window_transparent = true,
+	own_window_type = 'desktop',
+	own_window_hints = 'undecorated,above,sticky,skip_taskbar,skip_pager',
+	own_window_title = 'conkybarra',
 
-# Draw borders around text
-draw_borders no
 
-# Stippled borders?
-stippled_borders 0
+-- Use double buffering (reduces flicker, may not work for everyone)
+	double_buffer = true,
 
-# border margins
-border_margin 5
+-- Minimum size of text area
+	minimum_width = 30, minimum_height = 10,
+	maximum_width = 2000,
 
-# border width
-border_width 1
+-- Draw shades?
+	draw_shades = false,
 
-# Default colors and also border colors
-default_color 606060
-#default_shade_color white
-#default_outline_color black
-own_window_colour 181818
+-- Draw outlines?
+	draw_outline = false,
 
-color1 aaaaaa #etiquetas
-color2 eeeeee #datos
+-- Draw borders around text
+	draw_borders = false,
 
-# Text alignment, other possible values are commented
-#alignment top_left
-#alignment top_right
-#alignment bottom_left
-alignment bottom_right
+-- Stippled borders?
+	stippled_borders = 0,
 
-# Gap between borders of screen and text
-# same thing as passing -x at command line
-gap_x -20
-gap_y 0
+-- border width
+	border_width = 0,
 
-# Subtract file system buffers from used memory?
-no_buffers yes
+-- Default colors and also border colors
+	default_color = '#606060',
+--default_shade_color white
+--default_outline_color black
+	own_window_colour = '#181818',
 
-# set to yes if you want all text to be in uppercase
-uppercase no
-short_units yes
+	color1 = '#dddddd',--etiquetas
+	color2 = '#dddddd',--datos
+	color3 = '#ffffff',--clock
 
-# number of cpu samples to average
-# set to 1 to disable averaging
-cpu_avg_samples 2
+-- Text alignment, other possible values are commented
+--alignment top_left
+--alignment top_right
+--alignment bottom_left
+	alignment = 'bottom_right',
 
-# number of net samples to average
-# set to 1 to disable averaging
-net_avg_samples 1
+-- Gap between borders of screen and text
+-- same thing as passing -x at command line
+	gap_x = 0,
+	gap_y = 0,
 
-# Force UTF8? note that UTF8 support required XFT
-override_utf8_locale yes
+-- Subtract file system buffers from used memory?
+	no_buffers = true,
 
-# Add spaces to keep things from moving about?  This only affects certain objects.
-use_spacer none
-#${voffset 1}${font Dejavu Sans:size=8}${color2}${acpitemp}ºC$font${color}${voffset -1}${tab}${tab}
+-- set to yes if you want all text to be in uppercase
+	uppercase = false,
+	short_units = true,
 
-TEXT
-${font Dejavu Sans:size=8}  ${color2}${platform it87.656 temp 1}ºC$font${color1}    cpu: ${color}${voffset -5}${cpugraph 11,50 404040 404040} ${voffset 5}${goto 105}${color2}${cpu}${goto 150}${color1}ram: ${voffset -5}${color}${memgraph 11,50 404040 404040} ${voffset 5}${goto 200}${color2}${memperc}${color1}       io: ${voffset -5}${color}${diskiograph 11,50 404040 404040}${voffset 5}    ${color}${font Arrows:size=8}N$font $color2${downspeed eth0}${color} ${voffset -5}${downspeedgraph eth0 11,60 404040 404040 700}${voffset 4}  ${color}${font Arrows:size=8}S$font $color2${upspeed eth0}${color} ${voffset -5}${upspeedgraph eth0 11,60 404040 404040 70}    ${voffset -8}$color2${font DS-DIGI:size=8}${time %H:%M}
+-- number of cpu samples to average
+-- set to 1 to disable averaging
+	cpu_avg_samples = 2,
+
+-- number of net samples to average
+-- set to 1 to disable averaging
+	net_avg_samples = 1,
+
+-- Force UTF8? note that UTF8 support required XFT
+	override_utf8_locale = true,
+
+-- Add spaces to keep things from moving about?  This only affects certain objects.
+	use_spacer = 'right',
+
+};
+
+conky.text = [[
+${color2}${execpi 5 sensors | grep temp1 | head -n1 | cut -d" " -f9 | cut -b 2-8 | xargs ~/configuracion/colorize.sh}$font${color}${tab}${tab}cpu: ${cpugraph 12,50 404040 404040} ${goto 120}$color2${cpu}%${goto 170}${color}ram: ${memgraph 12,50 404040 404040} ${goto 220}$color2${memperc}%${color}${goto 270}io: ${diskiograph 12,50 404040 404040}${tab}${tab}${color}${font Littlearrows:size=15}C$font ${voffset -3}$color2${downspeed wlp1s0}${color} ${downspeedgraph wlp1s0 12,60 404040 404040 700}${tab}${tab}${color}${voffset -3}${font Littlearrows:size=15}A$font ${voffset -3} $color2${upspeed wlp1s0}${color} ${upspeedgraph wlp1s0 12,60 404040 404040 70}${voffset -2}${tab}${tab}$color3${font LCDMono:size=10}${time %H:%M} 
+]];

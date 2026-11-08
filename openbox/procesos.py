@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
 #-------------------------------------------------------------------------------
@@ -51,9 +51,9 @@ http://www.fsf.org/
 
 """
 
-#-------------------------------------------------------------------------------             
+#-------------------------------------------------------------------------------
 #                             User set variables
-#-------------------------------------------------------------------------------             
+#-------------------------------------------------------------------------------
 
 ##  processes (e.g. daemons, bash, this script, etc) you do not want to be shown in the process manipulation menu:
 ##  !!! donÂ´t forget quotes !!!
@@ -74,7 +74,7 @@ processes_menu_title = "processes"
 def _procName(pid):
     """ pid -> processname """
     try:
-        return file(os.path.join('/proc', str(pid), 'status'), 'r').readline().split()[1]
+        return open(os.path.join('/proc', str(pid), 'status'), 'r').readline().split()[1]
     except IOError:
         return None
 
@@ -84,19 +84,19 @@ def _procData(pid):
     info_list = list()
 
     ##  from /proc/<pid>/status get State, VmSize, VmLck, VmRSS, VmLib
-    status_file = file(os.path.join("/proc", str(pid), "status"), 'r')
+    status_file = open(os.path.join("/proc", str(pid), "status"), 'r')
     status = status_file.readlines()
     status_file.close()
     [info_list.append(status[i].split(":")[1].lstrip().rstrip("\n")) for i in (1,11,12,14,18)]
 
     ##  from /proc/<pid>/stat get priority(nicelevel)
-    priority_file = file(os.path.join('/proc', str(pid), 'stat'), 'r')
+    priority_file = open(os.path.join('/proc', str(pid), 'stat'), 'r')
     priority = priority_file.read()
     priority_file.close()
     info_list.append(priority.split()[18])
 
     ##  from /proc/<pid>/cmdline get command
-    cmdline_file = file(os.path.join("/proc", str(pid),"cmdline"),'r')
+    cmdline_file = open(os.path.join("/proc", str(pid),"cmdline"),'r')
     cmdline = cmdline_file.read()
     cmdline_file.close()
     info_list.append(" ".join(cmdline.split("\x00")[:-1]))
@@ -122,7 +122,7 @@ def userPidFilter():
              except ValueError:
                 pass
 
-    ##  sort pids according to process names 
+    ##  sort pids according to process names
     pid_proc_list = list()
     [pid_proc_list.append((i, _procName(i))) for i in uid_pids]
 
@@ -133,7 +133,7 @@ def userPidFilter():
     map(removeProcsFromList, uid_pids)
 
     pid_proc_list.sort(key = lambda t:t[1].lower())
-    return [pid_proc_list[i][0] for i in xrange(len(pid_proc_list))]
+    return [pid_proc_list[i][0] for i in range(len(pid_proc_list))]
 
 
 def printXml(pid):
@@ -142,77 +142,77 @@ def printXml(pid):
 
     proc_info = _procData(pid)
 
-	
-    print '<item label="%s"><action name="Execute"><command>true</command></action></item>' % (proc_info[6])
-    print '<separator />'
-	
+
+    print('<item label="%s"><action name="Execute"><command>true</command></action></item>' % (proc_info[6]))
+    print('<separator />')
+
 
 ##  (***) uncomment following line to enable cpu usage display:
-    print '<item label="CPU: %s' % (proc_info[7]) + ' %"><action name="execute"><command>true</command></action></item>'
+    print('<item label="CPU: %s' % (proc_info[7]) + ' %"><action name="execute"><command>true</command></action></item>')
 
 ##  (***)
-    print '<menu id="%s-menu-memory" label="Memoria: %s MB">' % (pid, int(proc_info[1].split()[0])/1024)
-    print '<item label="Ram: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[3])
-    print '<item label="Lib: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[4])
-    print '<item label="Lock: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[2])
-    print '<item label="Total: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[1])
-    print '</menu>'
+    print('<menu id="%s-menu-memory" label="Memoria: %s MB">' % (pid, int(proc_info[1].split()[0])/1024))
+    print('<item label="Ram: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[3]))
+    print('<item label="Lib: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[4]))
+    print('<item label="Lock: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[2]))
+    print('<item label="Total: %s"><action name="Execute"><command>true</command></action></item>' % (proc_info[1]))
+    print('</menu>')
 
-    print '<separator />'
+    print('<separator />')
 
 ##  (#*#) uncomment following lines to enable cpulimit:
-    #print '<menu id="%s-menu-cpulimit" label="cpulimit">' % (pid)
-    #print '<item label=" 10 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 10</command></action></item>' % (pid)
-    #print '<item label=" 20 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 20</command></action></item>' % (pid)
-    #print '<item label=" 30 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 30</command></action></item>' % (pid)
-    #print '<item label=" 40 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 40</command></action></item>' % (pid)
-    #print '<item label=" 50 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 50</command></action></item>' % (pid)
-    #print '<item label=" 60 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 60</command></action></item>' % (pid)
-    #print '<item label=" 70 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 70</command></action></item>' % (pid)
-    #print '<item label=" 80 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 80</command></action></item>' % (pid)
-    #print '<item label=" 90 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 90</command></action></item>' % (pid)
-    #print '<item label="100 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 100</command></action></item>' % (pid)
-    #print '</menu>'
+    #print('<menu id="%s-menu-cpulimit" label="cpulimit">' % (pid))
+    #print('<item label=" 10 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 10</command></action></item>' % (pid))
+    #print('<item label=" 20 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 20</command></action></item>' % (pid))
+    #print('<item label=" 30 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 30</command></action></item>' % (pid))
+    #print('<item label=" 40 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 40</command></action></item>' % (pid))
+    #print('<item label=" 50 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 50</command></action></item>' % (pid))
+    #print('<item label=" 60 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 60</command></action></item>' % (pid))
+    #print('<item label=" 70 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 70</command></action></item>' % (pid))
+    #print('<item label=" 80 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 80</command></action></item>' % (pid))
+    #print('<item label=" 90 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 90</command></action></item>' % (pid))
+    #print('<item label="100 &#37;"><action name="Execute"><command>cpulimit -p %s -z -l 100</command></action></item>' % (pid))
+    #print('</menu>')
 ##  (#*#)
 
-    print '<menu id="%s-menu-priority" label="Prioridad (%s)">' % (pid, proc_info[5])
-    print '<item label="-10 (alta)"><action name="Execute"><command>renice -10 %s</command></action></item>' % (pid)
-    print '<item label="-5"><action name="Execute"><command>renice -5 %s</command></action></item>' % (pid)
-    print '<item label="0 (normal)"><action name="Execute"><command>renice 0 %s</command></action></item>' % (pid)
-    print '<item label="5"><action name="Execute"><command>renice 5 %s</command></action></item>' % (pid)
-    print '<item label="10"><action name="Execute"><command>renice 10 %s</command></action></item>' % (pid)
-    print '<item label="15"><action name="Execute"><command>renice 15 %s</command></action></item>' % (pid)
-    print '<item label="19 (baja)"><action name="Execute"><command>renice 19 %s</command></action></item>' % (pid)
-    print '</menu>'
+    print('<menu id="%s-menu-priority" label="Prioridad (%s)">' % (pid, proc_info[5]))
+    print('<item label="-10 (alta)"><action name="Execute"><command>renice -10 %s</command></action></item>' % (pid))
+    print('<item label="-5"><action name="Execute"><command>renice -5 %s</command></action></item>' % (pid))
+    print('<item label="0 (normal)"><action name="Execute"><command>renice 0 %s</command></action></item>' % (pid))
+    print('<item label="5"><action name="Execute"><command>renice 5 %s</command></action></item>' % (pid))
+    print('<item label="10"><action name="Execute"><command>renice 10 %s</command></action></item>' % (pid))
+    print('<item label="15"><action name="Execute"><command>renice 15 %s</command></action></item>' % (pid))
+    print('<item label="19 (baja)"><action name="Execute"><command>renice 19 %s</command></action></item>' % (pid))
+    print('</menu>')
 
-    print '<menu id="%s-menu-state" label="%s">' % (pid, proc_info[0])
-    print '<item label="parar"><action name="Execute"><command>kill -SIGSTOP %s</command></action></item>' % (pid)
-    print '<item label="continuar"><action name="Execute"><command>kill -SIGCONT %s</command></action></item>' % (pid)
-    print '</menu>'
+    print('<menu id="%s-menu-state" label="%s">' % (pid, proc_info[0]))
+    print('<item label="parar"><action name="Execute"><command>kill -SIGSTOP %s</command></action></item>' % (pid))
+    print('<item label="continuar"><action name="Execute"><command>kill -SIGCONT %s</command></action></item>' % (pid))
+    print('</menu>')
 
-    print '<menu id="%s-menu-stop" label="Parar">' % (pid)
-    print '<item label="exit"><action name="Execute"><command>kill -TERM %s</command></action></item>' % (pid)
-    print '<item label="hangup"><action name="Execute"><command>kill -HUP %s</command></action></item>' % (pid)
-    print '<item label="interrupt"><action name="Execute"><command>kill -INT %s</command></action></item>' % (pid)
-    print '<item label="kill"><action name="Execute"><command>kill -KILL %s</command></action></item>' % (pid)
-    print '</menu>'
-    
+    print('<menu id="%s-menu-stop" label="Parar">' % (pid))
+    print('<item label="exit"><action name="Execute"><command>kill -TERM %s</command></action></item>' % (pid))
+    print('<item label="hangup"><action name="Execute"><command>kill -HUP %s</command></action></item>' % (pid))
+    print('<item label="interrupt"><action name="Execute"><command>kill -INT %s</command></action></item>' % (pid))
+    print('<item label="kill"><action name="Execute"><command>kill -KILL %s</command></action></item>' % (pid))
+    print('</menu>')
+
 
 def generateMenu(pid):
     """ generate main menu """
-    print '<menu id="%s-menu" label="%s" execute="python %s --pid %s"/>' % (pid, _procName(pid), sys.argv[0], pid)
+    print('<menu id="%s-menu" label="%s" execute="python3 %s --pid %s"/>' % (pid, _procName(pid), sys.argv[0], pid))
 
-#-------------------------------------------------------------------------------             
+#-------------------------------------------------------------------------------
 #                                    Main
-#-------------------------------------------------------------------------------             
+#-------------------------------------------------------------------------------
 
 import os, sys
 
 #-------------------------#
 if __name__ == "__main__" :
 #-------------------------#
-    print '<?xml version="1.0" encoding="UTF-8"?>'
-    print '<openbox_pipe_menu>'
+    print('<?xml version="1.0" encoding="UTF-8"?>')
+    print('<openbox_pipe_menu>')
     args = sys.argv[1:]
     if ('--pid' in args):
         try:
@@ -221,11 +221,14 @@ if __name__ == "__main__" :
             pass
     else:
         if ('--title' in args):
-            print '<separator label="%s" />' % (processes_menu_title)
+            print('<separator label="%s" />' % (processes_menu_title))
         else:
             pass
-        map(generateMenu, userPidFilter())
-    print '</openbox_pipe_menu>'
+        for pid in userPidFilter():
+            # print(pid)
+            print(generateMenu(pid))
+        # map(generateMenu, userPidFilter())
+    print('</openbox_pipe_menu>')
 
 # vim: set ft=python nu ts=4 sw=4 :
 

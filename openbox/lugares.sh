@@ -2,9 +2,9 @@
 
 echo '<openbox_pipe_menu>'
 
-filemanager="nautilus --no-desktop"
+filemanager="pcmanfm"
 
-for bookmark in `sed 's/[ ][^ ]*$//' .gtk-bookmarks
+for bookmark in `sed 's/[ ][^ ]*$//' .config/gtk-3.0/bookmarks
 ` ; do
   echo '<item label="'`basename ${bookmark}`'">'
   echo '<action name="Execute"><execute>'
